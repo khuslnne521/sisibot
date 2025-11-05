@@ -1,0 +1,28 @@
+<!-- Rename popup form -->
+<div class="bg-white border rounded-md shadow p-2 w-56">
+  <form hx-post="{% url 'rename_chat' cid=cid %}"
+        hx-target="closest .group"
+        hx-swap="outerHTML">
+    {% csrf_token %}
+    <input type="text" name="title" value="{{ c.title }}"
+           class="w-full border rounded px-2 py-1 text-sm"
+           autofocus />
+    <div class="mt-2 flex gap-2">
+      <button class="px-2 py-1 text-xs rounded bg-indigo-600 text-white">Save</button>
+      <!-- Cancel: дахин тухайн item-ийг серверээс авч солино -->
+      <button type="button"
+              class="px-2 py-1 text-xs rounded border"
+              hx-get="{% url 'chat_item' cid=cid %}"
+              hx-target="closest .group"
+              hx-swap="outerHTML">Cancel</button>
+    <!-- Delete: бүх жагсаалтыг шинэчлэнэ -->
+      <button type="button"
+              class="ml-auto px-2 py-1 text-xs rounded bg-rose-600 text-white"
+              hx-post="{% url 'delete_chat' cid=cid %}"
+              hx-target="#chat-list"
+              hx-swap="innerHTML">
+        Delete
+      </button>
+    </div>
+  </form>
+</div>

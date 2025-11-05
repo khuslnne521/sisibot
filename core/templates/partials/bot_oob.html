@@ -1,0 +1,16 @@
+{% comment %}Ботын typing placeholder-ийг OOB-р бодит мессежээр солино{% endcomment %}
+<div id="{{ ph }}" hx-swap-oob="true" class="flex gap-3">
+  <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white grid place-items-center font-bold">S</div>
+  <div class="max-w-[85%] bg-white bubble rounded-2xl px-4 py-3 space-y-2">
+    <div class="text-xs text-slate-500">{{ ts|date:"H:i" }}</div>
+    <!-- Newline -> <p> болон <br>, линкүүдийг идэвхжүүлнэ -->
+    <div class="prose max-w-none text-slate-800 text-[16px] leading-8">
+      <style>
+        .prose p{ margin:.25rem 0 !important; }
+        .prose p + p{ margin-top:1rem !important; }
+        .prose a{ color:#2563eb; text-decoration:underline; }
+      </style>
+      {{ bot|urlize|linebreaks }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SISIBOT · 3D Bot</title>
+
+  <!-- Spline viewer web component -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+
+  <style>
+    html, body { height: 100%; margin: 0; background: #0f172a; }
+    .wrap { height: 100%; }
+    /* optional: fullscreen container */
+    #bot3d { width: 100%; height: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <spline-viewer id="bot3d"
+      url="https://prod.spline.design/9246a5ca-7437-4bc7-9f6e-58b84d4e932f/scene.splinecode">
+    </spline-viewer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // wait for the custom element
+      await customElements.whenDefined('spline-viewer');
+      const viewer = document.getElementById('bot3d');
+      if (!viewer) return;
+
+      // inject style inside Shadow DOM to hide Spline logo
+      const hideLogo = () => {
+        const root = viewer.shadowRoot;
+        if (!root) return;
+        let style = root.getElementById('hide-logo-style');
+        if (!style) {
+          style = document.createElement('style');
+          style.id = 'hide-logo-style';
+          root.appendChild(style);
+        }
+        style.textContent = `
+          #logo { display: none !important; }
+        `;
+      };
+
+      // run immediately if shadowRoot exists
+      if (viewer.shadowRoot) hideLogo();
+
+      // after scene loads
+      viewer.addEventListener('load', hideLogo);
+
+      // fallback observer (some builds attach shadow later)
+      new MutationObserver(hideLogo).observe(viewer, { childList: true, subtree: true });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{# expects: chats (list of (cid, c)), current_chat #}
+<div class="space-y-1">
+  {% for cid, c in chats %}
+    {% include "partials/chat_item.html" with cid=cid c=c current_chat=current_chat %}
+  {% empty %}
+    <div class="text-sm text-slate-500 px-3 py-2">No chats</div>
+  {% endfor %}
+</div>

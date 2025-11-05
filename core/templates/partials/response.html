@@ -1,0 +1,14 @@
+<div class="flex justify-end">
+  <div class="max-w-[80%] bg-indigo-600 text-white bubble rounded-2xl px-4 py-3">
+    <div class="text-xs opacity-80 text-right">{{ ts|date:"H:i" }}</div>
+    <div class="text-sm whitespace-pre-wrap">{{ user }}</div>
+  </div>
+</div>
+
+<div class="flex gap-3">
+  <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white grid place-items-center font-bold">S</div>
+  <div class="max-w-[85%] bg-white bubble rounded-2xl px-4 py-3 space-y-2">
+    <div class="text-xs text-slate-500">{{ ts|date:"H:i" }}</div>
+    <div class="prose prose-sm max-w-none text-slate-800">{{ bot|safe }}</div>
+  </div>
+</div>

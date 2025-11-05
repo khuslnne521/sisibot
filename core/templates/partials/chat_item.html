@@ -1,0 +1,23 @@
+{# нэг мөр чат item — hover дээр 3 цэг гарна #}
+<div class="relative group">
+
+    <!-- Энэ чатыг сонгох -->
+  <a href="{% url 'switch_chat' cid %}"
+     class="flex items-center justify-between px-3 py-2 rounded-lg
+            {% if cid == current_chat %}bg-slate-100{% else %}hover:bg-slate-50{% endif %}">
+    <span class="truncate">{{ c.title }}</span>
+  </a>
+
+  <!-- 3 цэг товч -->
+  <button
+    class="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md
+           opacity-0 group-hover:opacity-100 hover:bg-slate-100"
+    hx-get="{% url 'rename_chat' cid=cid %}"
+    hx-target="#chat-menu-{{ cid }}"
+    hx-swap="innerHTML">
+    ⋯
+  </button>
+
+  <!-- Popup контейнер (хоосон) -->
+  <div id="chat-menu-{{ cid }}" class="absolute right-2 top-full z-20"></div>
+</div>
