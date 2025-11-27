@@ -24,7 +24,7 @@ from openai import OpenAI
 
 _FAISS_OK = True
 try:
-    import faiss  # type: ignore
+    import faiss  
 except Exception:
     _FAISS_OK = False
 

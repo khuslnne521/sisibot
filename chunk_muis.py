@@ -226,7 +226,7 @@ def main():
         try:
             chunks = chunk_docx_file(
                 fp,
-                source_id=os.path.relpath(fp, indir),  # харьцангуй замыг source_id болгох
+                source_id=os.path.relpath(fp, indir),  
                 max_tokens=args.max_tokens,
                 overlap_tokens=args.overlap
             )
